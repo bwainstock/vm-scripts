@@ -19,9 +19,9 @@ virt-clone -o "$BASEIMG" -n "$NEWVM" -f "$NEWVMDISK"
 
 if [ -z "$IP" ]
 then
-  virt-sysprep -d "$NEWVM" --hostname "$NEWVM" --script "$CONFIGSCRIPTDHCP"
+  virt-sysprep  -d "$NEWVM" --hostname "$NEWVM" --script "$CONFIGSCRIPTDHCP"
 else
-  virt-sysprep -d "$NEWVM" --hostname "$NEWVM" --script "$CONFIGSCRIPT"
+  virt-sysprep  -d "$NEWVM" --hostname "$NEWVM" --script "$CONFIGSCRIPT $IP"
 fi
 
 virsh start "$NEWVM"
