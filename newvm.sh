@@ -19,15 +19,9 @@ virt-clone -o "$BASEIMG" -n "$NEWVM" -f "$NEWVMDISK"
 
 if [ -z "$IP" ]
 then
-  virt-sysprep -d "$NEWVM" --enable udev-persistent-net,bash-history,logfiles,utmp,net-hostname,customize --firstboot-command "$FIRSTBOOTCMDDHCP"
-else
-  virt-sysprep -d "$NEWVM" --enable udev-persistent-net,bash-history,logfiles,utmp,net-hostname,customize --firstboot-command "$FIRSTBOOTCMD"
-fi 
-
-if [ -z "$IP" ]
-then
   virt-sysprep -d "$NEWVM" --hostname "$NEWVM" --script "$CONFIGSCRIPTDHCP"
 else
   virt-sysprep -d "$NEWVM" --hostname "$NEWVM" --script "$CONFIGSCRIPT"
 fi
+
 virsh start "$NEWVM"
